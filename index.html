@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+   <head>
+      <meta charset="utf-8">
+      <title>The HTML5 Herald</title>
+   </head>
+   <body  style="">
+      <h1>Notes</h1>
+      
+      <p>
+        field_integer_1が、1のときに、
+        field_integer_2を必須チェック
+      </p>
+      <pre>
+    public function rules()
+    {
+        return [
+            'field_integer_1' => ['required','integer'],
+            'field_integer_2' => ['required_if:field1,1', 'integer'],
+        ];
+    }
+  </pre>
+      <table border=1>
+         <tr>
+            <th>
+               field_integer_1
+            </th>
+            <th>
+               field_integer_2
+            </th>
+            <th>
+              result
+            </th>
+            <th>
+               message
+            </th>
+         </tr>
+         <tr>
+            <td>
+               0
+            </td>
+            <td>
+               ABC
+            </td>
+            <th>
+              error
+            </th>
+            <td>
+               The field integer 2 must be an integer
+            </td>
+         </tr>
+         <tr>
+          <td>
+             1
+          </td>
+          <td>
+             ABC
+          </td>
+          <th>
+            error
+          </th>
+          <td>
+             The field integer 2 must be an integer
+          </td>
+       </tr>
+       <tr>
+        <td>
+           1
+        </td>
+        <td>
+           ""
+        </td>
+        <th>
+          error
+        </th>
+        <td>
+           The field integer 2 must be an integer
+        </td>
+     </tr>
+     <tr>
+      <td>
+         1
+      </td>
+      <td>
+         10
+      </td>
+      <th>
+        pass
+      </th>
+      <td>
+      </td>
+   </tr>
+      </table>
+   </body>
+</html>
