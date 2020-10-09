@@ -5,91 +5,151 @@
       <title>The HTML5 Herald</title>
    </head>
    <body  style="">
-      <h1>Notes</h1>
-      
-      <p>
-        field_integer_1が、1のときに、
-        field_integer_2を必須チェック
-      </p>
-      <pre>
+      <dov>
+         <h1>required_if(数値)</h1>
+         <p>
+            field_1が、1のときに、
+            field_2を必須チェック
+         </p>
+         <pre>
     public function rules()
     {
         return [
-            'field_integer_1' => ['required','integer'],
-            'field_integer_2' => ['required_if:field1,1', 'integer'],
+            'field_1' => ['required','string'],
+            'field_2' => ['required_if:field1,check', 'string'],
         ];
     }
   </pre>
-      <table border=1>
-         <tr>
-            <th>
-               field_integer_1
-            </th>
-            <th>
-               field_integer_2
-            </th>
-            <th>
-              result
-            </th>
-            <th>
-               message
-            </th>
-         </tr>
-         <tr>
-            <td>
-               0
-            </td>
-            <td>
-               ABC
-            </td>
-            <th>
-              error
-            </th>
-            <td>
-               The field integer 2 must be an integer
-            </td>
-         </tr>
-         <tr>
-          <td>
-             1
-          </td>
-          <td>
-             ABC
-          </td>
-          <th>
-            error
-          </th>
-          <td>
-             The field integer 2 must be an integer
-          </td>
-       </tr>
-       <tr>
-        <td>
-           1
-        </td>
-        <td>
-           ""
-        </td>
-        <th>
-          error
-        </th>
-        <td>
-           The field integer 2 must be an integer
-        </td>
-     </tr>
-     <tr>
-      <td>
-         1
-      </td>
-      <td>
-         10
-      </td>
-      <th>
-        pass
-      </th>
-      <td>
-      </td>
-   </tr>
-      </table>
+         <table border=1>
+            <tr>
+               <th>
+                  field_1
+               </th>
+               <th>
+                  field_2
+               </th>
+               <th>
+                  result
+               </th>
+               <th>
+                  message
+               </th>
+            </tr>
+            <tr>
+               <td>
+                  0
+               </td>
+               <td>
+                  ABC
+               </td>
+               <th>
+                  error
+               </th>
+               <td>
+                  The field integer 2 must be an integer
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  1
+               </td>
+               <td>
+                  ABC
+               </td>
+               <th>
+                  error
+               </th>
+               <td>
+                  The field integer 2 must be an integer
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  1
+               </td>
+               <td>
+                  ""
+               </td>
+               <th>
+                  error
+               </th>
+               <td>
+                  The field integer 2 must be an integer
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  1
+               </td>
+               <td>
+                  10
+               </td>
+               <th>
+                  pass
+               </th>
+               <td>
+               </td>
+            </tr>
+         </table>
+      </dov>
+      <dov>
+        <h1>required_if(文字列)</h1>
+        <p>
+           field_1が'tomato'の文字列の時、
+           field_2を必須チェック＋文字列かどうかチェック
+        </p>
+        <pre>
+   public function rules()
+   {
+       return [
+        'field_1' => ['string'],
+        'field_2' => ['required_if:field1,tomato', 'string'],
+       ];
+   }
+ </pre>
+        <table border=1>
+           <tr>
+              <th>
+                 field_1
+              </th>
+              <th>
+                 field_2
+              </th>
+              <th>
+                 result
+              </th>
+              <th>
+                 message
+              </th>
+           </tr>
+           <tr>
+              <td>
+                 tomato
+              </td>
+              <td>
+                 
+              </td>
+              <th>
+                 error
+              </th>
+              <td>
+                The field 4 must be a string.
+              </td>
+           </tr>
+           <tr>
+              <td>
+                tomato
+              </td>
+              <td>
+                 mellon
+              </td>
+              <th>
+                 pass
+              </th>
+              <td>
+              </td>
+           </tr>
+        </table>
+     </dov>
    </body>
 </html>
