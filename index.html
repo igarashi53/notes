@@ -5,7 +5,20 @@
       <title>The HTML5 Herald</title>
    </head>
    <body  style="">
-      <div>
+    <div>
+	<h1>envを更新したら</h1>
+	<pre>
+	php artisan cache:clear
+	php artisan config:clear
+	php artisan config:cache
+	</pre>     
+	<p>
+	app/bootstrap/cache/config.php<br>
+	にキャッシュされる
+	</p>
+    </div>     
+ 
+     <div>
          <h1>諸々のキャッシュクリア</h1>
          <pre>
                 php artisan cache:clear &&
