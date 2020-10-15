@@ -40,7 +40,7 @@
         <h1>
             あるカラムが取れたかの確認の条件サンプル
         </h1>
-        <pre>
+        <pre class="note">
 
         $selectedRecord = Model::where('customer_id', '=', $customerId)->select('col_name')->get()->first();
         if (!is_null($selectedRecord) && !empty($selectedRecord['col_name'])) {
@@ -232,7 +232,26 @@
                     </td>
                 </tr>
             </table>
-        </dov>
+        </div>
+
+        <div>
+         <h1>validationの追加</h1>
+         <pre class="note">
+
+    /**
+    * 
+    * @param $validator
+    */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if (!empty($this->col1) && !empty($this->col2)) {
+                 $validator->errors()->add('field', '設定できる値はどちらか一方です。');
+                }
+            });
+    }
+         </pre>
+         </div>
 </body>
 
 </html>
