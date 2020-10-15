@@ -1,0 +1,8 @@
+docker-compose
+
+build:構成時のオプション
+context: Dockerfile / GitRepo URL
+args: buildオブション
+dockerfile:Dockerfileの別名
+
+

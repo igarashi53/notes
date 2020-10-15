@@ -1,26 +1,69 @@
 <!doctype html>
 <html lang="ja">
-   <head>
-      <meta charset="utf-8">
-      <title>The HTML5 Herald</title>
-   </head>
-   <body  style="">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <title>note</title>
+</head>
+
+<body style="">
     <div>
-	<h1>envを更新したら</h1>
-	<pre>
+        <h1>シーダー系</h1>
+        <pre class="note">
+            //シーダーを指定して実施
+            php artisan db:seed --class=TestSeeder
+         </pre>
+    </div>
+    <div>
+        <h1>マイグレーション系</h1>
+        <pre class="note">
+            //ファイルを指定してマイグレーション
+            php artisan migrate --path=/database/migrations/2020_06_15_084834_add_column_xxxxx.php
+            //１つ前のマイグレーションに戻る
+            php artisan migrate:rollback --step=1
+            //シーダーを指定して実施
+            php artisan db:seed --class=TestSeeder
+         </pre>
+    </div>
+    <div>
+        <h1>Github Actions Samples </h1>
+        <pre class="note">
+		on:
+		  push:
+		    branches:
+		      - master
+		      - foo*	
+	</pre>
+    </div>
+    <div>
+        <h1>
+            あるカラムが取れたかの確認の条件サンプル
+        </h1>
+        <pre>
+
+        $selectedRecord = Model::where('customer_id', '=', $customerId)->select('col_name')->get()->first();
+        if (!is_null($selectedRecord) && !empty($selectedRecord['col_name'])) {
+            return $selectedRecord['col_name'];
+        }
+           </pre>
+    </div>
+    <div>
+        <h1>envを更新したら</h1>
+        <pre class="note">
 	php artisan cache:clear
 	php artisan config:clear
 	php artisan config:cache
-	</pre>     
-	<p>
-	app/bootstrap/cache/config.php<br>
-	にキャッシュされる
-	</p>
-    </div>     
- 
-     <div>
-         <h1>諸々のキャッシュクリア</h1>
-         <pre>
+	</pre>
+        <p>
+            app/bootstrap/cache/config.php<br>
+            にキャッシュされる
+        </p>
+    </div>
+
+    <div>
+        <h1>諸々のキャッシュクリア</h1>
+        <pre class="note">
                 php artisan cache:clear &&
                 php artisan config:clear &&
                 php artisan config:cache &&
@@ -31,27 +74,27 @@
                 composer dump-autoload &&
                 rm -f bootstrap/cache/config.php
             </pre>
-      </div>
-      <div>
-         <h1>seederで特定のファイルを入れる</h1>
-         <pre>
+    </div>
+    <div>
+        <h1>seederで特定のファイルを入れる</h1>
+        <pre class="note">
                 php artisan db:seed --class=TestTableSeeder
             </pre>
-      </div>
-      <div>
-         <h1>外部キーチェックのOFFとON</h1>
-         <pre>
+    </div>
+    <div>
+        <h1>外部キーチェックのOFFとON</h1>
+        <pre class="note">
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
                 DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             </pre>
-      </div>
-      <div>
-      <h1>required_if(数値)</h1>
-      <p>
-         field_1が、1のときに、
-         field_2を必須チェック
-      </p>
-      <pre>
+    </div>
+    <div>
+        <h1>required_if(数値)</h1>
+        <p>
+            field_1が、1のときに、
+            field_2を必須チェック
+        </p>
+        <pre class="note">
             public function rules()
             {
                 return [
@@ -60,85 +103,85 @@
                 ];
             }
           </pre>
-      <table border=1>
-         <tr>
-            <th>
-               field_1
-            </th>
-            <th>
-               field_2
-            </th>
-            <th>
-               result
-            </th>
-            <th>
-               message
-            </th>
-         </tr>
-         <tr>
-            <td>
-               0
-            </td>
-            <td>
-               ABC
-            </td>
-            <th>
-               error
-            </th>
-            <td>
-               The field integer 2 must be an integer
-            </td>
-         </tr>
-         <tr>
-            <td>
-               1
-            </td>
-            <td>
-               ABC
-            </td>
-            <th>
-               error
-            </th>
-            <td>
-               The field integer 2 must be an integer
-            </td>
-         </tr>
-         <tr>
-            <td>
-               1
-            </td>
-            <td>
-               ""
-            </td>
-            <th>
-               error
-            </th>
-            <td>
-               The field integer 2 must be an integer
-            </td>
-         </tr>
-         <tr>
-            <td>
-               1
-            </td>
-            <td>
-               10
-            </td>
-            <th>
-               pass
-            </th>
-            <td>
-            </td>
-         </tr>
-      </table>
-      </dov>
-      <dov>
-         <h1>required_if(文字列)</h1>
-         <p>
-            field_1が'tomato'の文字列の時、
-            field_2を必須チェック＋文字列かどうかチェック
-         </p>
-         <pre>
+        <table border=1>
+            <tr>
+                <th>
+                    field_1
+                </th>
+                <th>
+                    field_2
+                </th>
+                <th>
+                    result
+                </th>
+                <th>
+                    message
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    0
+                </td>
+                <td>
+                    ABC
+                </td>
+                <th>
+                    error
+                </th>
+                <td>
+                    The field integer 2 must be an integer
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td>
+                    ABC
+                </td>
+                <th>
+                    error
+                </th>
+                <td>
+                    The field integer 2 must be an integer
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td>
+                    ""
+                </td>
+                <th>
+                    error
+                </th>
+                <td>
+                    The field integer 2 must be an integer
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td>
+                    10
+                </td>
+                <th>
+                    pass
+                </th>
+                <td>
+                </td>
+            </tr>
+        </table>
+        </dov>
+        <dov>
+            <h1>required_if(文字列)</h1>
+            <p>
+                field_1が'tomato'の文字列の時、
+                field_2を必須チェック＋文字列かどうかチェック
+            </p>
+            <pre class="note">
    public function rules()
    {
        return [
@@ -147,48 +190,49 @@
        ];
    }
  </pre>
-         <table border=1>
-            <tr>
-               <th>
-                  field_1
-               </th>
-               <th>
-                  field_2
-               </th>
-               <th>
-                  result
-               </th>
-               <th>
-                  message
-               </th>
-            </tr>
-            <tr>
-               <td>
-                  tomato
-               </td>
-               <td>
-               </td>
-               <th>
-                  error
-               </th>
-               <td>
-                  The field 4 must be a string.
-               </td>
-            </tr>
-            <tr>
-               <td>
-                  tomato
-               </td>
-               <td>
-                  mellon
-               </td>
-               <th>
-                  pass
-               </th>
-               <td>
-               </td>
-            </tr>
-         </table>
-      </dov>
-   </body>
+            <table border=1>
+                <tr>
+                    <th>
+                        field_1
+                    </th>
+                    <th>
+                        field_2
+                    </th>
+                    <th>
+                        result
+                    </th>
+                    <th>
+                        message
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        tomato
+                    </td>
+                    <td>
+                    </td>
+                    <th>
+                        error
+                    </th>
+                    <td>
+                        The field 4 must be a string.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        tomato
+                    </td>
+                    <td>
+                        mellon
+                    </td>
+                    <th>
+                        pass
+                    </th>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </dov>
+</body>
+
 </html>
