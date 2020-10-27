@@ -1,5 +1,5 @@
     <div>
-        <h1>
+        <h1  class="title">
             タイトル
         </h1>
         <pre class="note">

@@ -16,6 +16,18 @@
          </pre>
     </div>
     <div>
+        <div>
+            <h1  class="title">
+                emptyだと、０でもtrueなので、0は除外
+            </h1>
+            <pre class="note">
+                if (empty($value) && $value != 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            </pre>
+        </div>
         <h1 class="title">マイグレーション系</h1>
         <pre class="note">
             //ファイルを指定してマイグレーション
