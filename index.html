@@ -9,6 +9,71 @@
 
 <body style="margin-left:10px;margin-right:10px;">
     <div>
+        <h1  class="title">
+            Laravel 独自存在チェック
+        </h1>
+        <pre class="note">
+            namespace App\Rules;
+            
+            use Illuminate\Contracts\Validation\Rule;
+            use App\Models\SampleModel;
+            
+            class DiscoutRateIsGreaterThanLowerDiscountRate implements Rule
+            {
+                private $primaryKey;
+            
+                public function __construct($data)
+                {
+                    $this->primaryKey = $data['event_id'];
+                }
+            
+                /**
+                 * Determine if the validation rule passes.
+                 *
+                 * @param  string  $attribute
+                 * @param  mixed  $value
+                 * @return bool
+                 */
+                public function passes($attribute, $inputValue)
+                {
+                    if (empty($this->primaryKey)) {
+                        return true;
+                    } else {
+                        $samleModel = SampleModel::select(['masterValue'])->find($this->primaryKey);
+                        if (is_null($samleModel->masterValue)) {
+                            return true;
+                        } else {
+                            return $samleModel->masterValue <= $inputValue;
+                        }
+                    }
+                }
+            
+                /**
+                 * Get the validation error message.
+                 *
+                 * @return string
+                 */
+                public function message()
+                {
+                    return ':attributeがmasterValueより小さいです。';
+                }
+            }
+        </pre>
+    </div>
+    <div>
+        <h1  class="title">
+            正しいURLか確認
+        </h1>
+        <pre class="note">
+            $text = "http://www.yahoo.co.jp/";
+            if (preg_match('/^(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)$/', $text)) {
+                echo "正しいURLです";
+            } else {
+                echo "正しくないURLです";
+            }
+        </pre>
+    </div>
+    <div>
         <h1 class="title">シーダー系</h1>
         <pre class="note">
             //シーダーを指定して実施
@@ -85,7 +150,7 @@
                 php artisan optimize &&
                 composer dump-autoload &&
                 rm -f bootstrap/cache/config.php
-            </pre>
+        </pre>
     </div>
     <div>
         <h1 class="title">seederで特定のファイルを入れる</h1>
@@ -102,7 +167,7 @@
     </div>
     <div>
         <h1 class="title">
-            独自の存在チェック
+            独自のDB存在チェック
         </h1>
         <pre class="note">
             namespace App\Rules;
