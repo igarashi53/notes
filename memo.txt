@@ -6,3 +6,25 @@
 コード            
         </pre>
     </div>
+
+
+
+            
+        $pattern = '/\-|ー/ui';
+        if($request->has('target_month')){
+            $params['target_month'] = preg_replace($pattern, '$1', $request->input('target_month'));
+        }
+
+        if($request->has('payment_day')){
+            $params['payment_day'] = preg_replace($pattern, '$1', $request->input('payment_day'));
+        }
+
+        if($request->has('claim_day')){
+            $params['claim_day'] = preg_replace($pattern, '$1', $request->input('payment_day'));
+        }
+
+
+
+optional
+
+carbon

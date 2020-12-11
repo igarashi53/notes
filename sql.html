@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+   <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="css/style.css">
+      <title>note</title>
+   </head>
+   <body style="margin-left:10px;margin-right:10px;">
+      <div>
+         <h1  class="title">
+            レコードがなければINSERT、あればUPDATEできる。(ON DUPLICATE KEY UPDATE）       
+         </h1>
+         <pre class="note">
+            CREATE TABLE test.`users` (
+                `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ユーザID',
+                `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '名前',
+                PRIMARY KEY (`id`)
+              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+              
+              INSERT INTO  test.`users` (id, name) VALUE(1,"taro");
+              
+              SELECT * FROM test.users;
+              
+        </pre>
+        <div class="note" >
+            <table border="1" style="border-collapse: collapse">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+             </tr>
+             <tr class="odd">
+                <td>1</td>
+                <td>taro</td>
+             </tr>
+            </table>
+        </div>
+
+         <pre class="note">
+            INSERT INTO  test.`users`(id, name) VALUE(1,"JIRO")
+            ON DUPLICATE KEY UPDATE
+                    name='JIRO'
+                    ;
+                    
+        </pre>
+        <div class="note" >
+            <table border="1" style="border-collapse: collapse">
+                <tr>
+                <th>id</th>
+                <th>name</th>
+            </tr>
+            <tr class="odd">
+                <td>1</td>
+                <td>JIRO</td>
+            </tr>
+            </table>
+        </div>
+      </div>
+   </body>
+</html>
